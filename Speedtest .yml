@@ -10,7 +10,6 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      #- APP_KEY=9cF+8z/5kJ9zL3mXq9zL3mXq9zL3mXq9zL3mXq9zL= # Replace with your generated key
       - APP_KEY=base64:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx # Poner esta KEY que genera este comendo echo -n 'base64:'; openssl rand -base64 32;
       - DB_CONNECTION=sqlite
       - TZ=Europe/Madrid # Ajusta a tu zona horaria, por ejemplo, España
