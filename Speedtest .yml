@@ -1,0 +1,32 @@
+version: '3'
+services:
+  speedtest-tracker:
+    image: lscr.io/linuxserver/speedtest-tracker:latest
+    container_name: speedtest-tracker
+    restart: unless-stopped
+    ports:
+      - 8080:80
+      - 8443:443
+    environment:
+      - PUID=1000
+      - PGID=1000
+      #- APP_KEY=9cF+8z/5kJ9zL3mXq9zL3mXq9zL3mXq9zL3mXq9zL= # Replace with your generated key
+      - APP_KEY=base64:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx # Poner esta KEY que genera este comendo echo -n 'base64:'; openssl rand -base64 32;
+      - DB_CONNECTION=sqlite
+      - TZ=Europe/Madrid # Ajusta a tu zona horaria, por ejemplo, España
+      - SPEEDTEST_SCHEDULE=*/5 * * * * # Ejecuta tests cada 5 minutos
+      #- APP_DEBUG=true # Entra en modo Debug
+      
+    volumes:
+      - speedtest_data:/config
+      #- /path/to-custom-ssl-keys:/config/keys # Optional: For custom SSL certificates
+    networks:
+      - portainer_network
+
+networks:
+  portainer_network:
+    driver: bridge
+
+volumes:
+  speedtest_data:
+      driver: local
